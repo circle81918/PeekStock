@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+    <title>Stock Crawler</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/extension.css">
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="popup.js"></script>
+</head>
+<body>
+    <div class="container">
+        <form class="form-inline">
+          <input class="form-control mr-sm-2" type="search" placeholder="股票代號" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <table class="table table-striped">
+          <thead id="table_head">
+            <tr>
+              <th scope="col">股票代碼</th>
+              <th scope="col">現價</th>
+              <th scope="col">漲跌(%)</th>
+            </tr>
+          </thead>
+</body>
+</html>
