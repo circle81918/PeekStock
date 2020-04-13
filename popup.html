@@ -6,14 +6,12 @@
     <title>Stock Crawler</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/extension.css">
-    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="popup.js"></script>
 </head>
 <body>
     <div class="container">
         <form class="form-inline">
-          <input class="form-control mr-sm-2" type="search" placeholder="股票代號" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          <input class="form-control mr-sm-2" type="search" placeholder="股票代號" aria-label="Search" id="stockID">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="submit">Add</button>
         </form>
         <table class="table table-striped">
           <thead id="table_head">
@@ -21,7 +19,12 @@
               <th scope="col">股票代碼</th>
               <th scope="col">現價</th>
               <th scope="col">漲跌(%)</th>
+              <th scope="col"></th>
             </tr>
           </thead>
+          <tbody id="table_body">
+          </tbody>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="popup.js"></script>
 </body>
 </html>

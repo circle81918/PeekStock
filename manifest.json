@@ -9,6 +9,7 @@
      "default_title": "Peek!"
   },
   "permissions": [
+    "storage",
     "http://*/*",
     "https://*/*"
   ]
