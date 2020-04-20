@@ -1,49 +1,47 @@
+setInterval(function(){ getStock(); }, 5000);
+
 document.addEventListener('click',function(e){
     if(e.target.id == 'remove'){
         removeStock(e.target.value);
 	 }
-	 if(e.target.id == 'submit'){
+	 if(e.target.id == 'add'){
 		addStock();
 	 }
  });
 
 $(document).ready(function(){
-	chrome.storage.local.get('stockList', function(data) {
-		var stockList = new Set(data.stockList);
-		getStockInfo(stockList);
-	});
+	getStock();
 })
 
 function addStock(){
 	var inputStockID = document.getElementById("stockID").value;
 	if(inputStockID){
 		chrome.storage.local.get('stockList', function(data) {
-			let stockList = new Set(data.stockList);
-			stockList.add(inputStockID);
-			let arrayStockList = Array.from(stockList);
+			let setStockList = new Set(data.stockList);
+			setStockList.add(inputStockID);
+			let arrayStockList = Array.from(setStockList);
 			chrome.storage.local.set({stockList:arrayStockList});
+			location.reload();
 		});
 	}
 }
 
-function removeStock(stockID){
+function getStock(){
 	chrome.storage.local.get('stockList', function(data) {
 		let stockList = new Set(data.stockList);
-		stockList.delete(stockID);
-		let arrayStockList = Array.from(stockList);
+		getStockInfo(stockList);
+	});
+}
+
+function removeStock(stockID){
+	chrome.storage.local.get('stockList', function(data) {
+		let setStockList = new Set(data.stockList);
+		setStockList.delete(stockID);
+		let arrayStockList = Array.from(setStockList);
 		chrome.storage.local.set({stockList:arrayStockList});
 		location.reload();
 	});
 }
-
-function clearLocalStorage(){
-	chrome.storage.local.clear(function() {
-	  var error = chrome.runtime.lastError;
-		if (error) {
-		  alert(error);
-		}
-	 })
-   }
 
 function getStockInfo(stockList){
 	var queryUrl = "http://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch="
@@ -64,3 +62,12 @@ function getStockInfo(stockList){
 		},
 	}); 
 }
+
+function clearLocalStorage(){
+	chrome.storage.local.clear(function() {
+	  var error = chrome.runtime.lastError;
+		if (error) {
+		  alert(error);
+		}
+	 })
+   }
