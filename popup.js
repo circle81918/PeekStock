@@ -26,7 +26,7 @@ document.addEventListener('click',function(e){
 		var stockData = "";
 		for (key in items)
 		{
-			stockData  += `<tr><td>${items[key].name}</td><td>${items[key].currentPrice}</td><td>${String(items[key].change).slice(0,3)}</td><td><button class="btn btn-outline-danger btn-sm" id='remove' value="${key}">Remove</button></td></tr>`;
+			stockData  += `<tr><td>${items[key].name}</td><td>${items[key].currentPrice}</td><td>${items[key].change}</td><td><button class="btn btn-outline-danger btn-sm" id='remove' value="${key}">Remove</button></td></tr>`;
 		}
 		document.getElementById("table_body").innerHTML = stockData;
 	});

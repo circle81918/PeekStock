@@ -4,7 +4,7 @@ function addStock(stockID){
 	if(stockID){
 		chrome.storage.local.get(stockID, function(data) {
 			if (typeof data[stockID] == 'undefined'){
-				var defaultValue = {name : stockID, currentPrice : 0.0, change : 0.0};
+				var defaultValue = {name : stockID, currentPrice : "0.0", change : "0.0"};
 				data[stockID] = defaultValue;
 				chrome.storage.local.set(data);
 			}
@@ -30,9 +30,9 @@ function updateStock(){
 				let stockArray = JSON.parse(data);
 				let stockData = {};
 				$.each(stockArray.msgArray, function(index, stock) { 
-					if(stock.z){
+					if(stock.z != '-'){
 						let changePercent = (stock.z == stock.y ) ? 0.0 : (stock.z - stock.y) / stock.y * 100;
-						let updateValue = {name : stock.n, currentPrice : stock.z, change : changePercent};
+						let updateValue = {name : stock.n, currentPrice : stock.z, change : String(changePercent.toFixed(2))};
 						stockData[stock.c] = updateValue;
 					}
 				});
