@@ -1,11 +1,5 @@
 var bg = chrome.extension.getBackgroundPage();
 
-// setInterval( function() {
-// 	updateStockTable(function(){
-// 		location.reload();
-// 	});
-// }, 5000);
-
 $(document).ready(function(){
 	updateStockTable();
 })
@@ -23,10 +17,15 @@ document.addEventListener('click',function(e){
 
  function updateStockTable(){
 	chrome.storage.local.get(null, function(items){
-		var stockData = "";
+		let stockData = "";
+		let color = "black";
 		for (key in items)
 		{
-			stockData  += `<tr><td>${items[key].name}</td><td>${items[key].currentPrice}</td><td>${items[key].change}</td><td><button class="btn btn-outline-danger btn-sm" id='remove' value="${key}">Remove</button></td></tr>`;
+			if (items[key].change < 0)
+				color = "green"
+			if (items[key].change > 0)
+				color = "red"
+			stockData  += `<tr align='center'><td>${items[key].name}</td><td>${items[key].currentPrice}</td><td><font color="${color}">${items[key].change}</td><td><button class="btn btn-outline-danger btn-sm" id='remove' value="${key}">Remove</button></td></tr>`;
 		}
 		document.getElementById("table_body").innerHTML = stockData;
 	});

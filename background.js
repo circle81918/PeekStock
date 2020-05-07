@@ -4,7 +4,7 @@ function addStock(stockID){
 	if(stockID){
 		chrome.storage.local.get(stockID, function(data) {
 			if (typeof data[stockID] == 'undefined'){
-				var defaultValue = {name : stockID, currentPrice : "0.0", change : "0.0"};
+				var defaultValue = {name : stockID, currentPrice : "-", change : "-"};
 				data[stockID] = defaultValue;
 				chrome.storage.local.set(data);
 			}
