@@ -29,15 +29,16 @@ function updateStock(){
             success: function (data) {
 				let stockArray = JSON.parse(data);
 				let stockData = {};
-				$.each(stockArray.msgArray, function(index, stock) { 
-					if(stock.z != '-'){
-						let changePercent = (stock.z == stock.y ) ? 0.0 : (stock.z - stock.y) / stock.y * 100;
-						let updateValue = {name : stock.n, currentPrice : stock.z, change : String(changePercent.toFixed(2))};
-						stockData[stock.c] = updateValue;
-					}
-				});
-				chrome.storage.local.set(stockData);
-				//callback();
+				if(stockArray.msgArray != undefined){
+					$.each(stockArray.msgArray, function(index, stock) { 
+						if(stock.z != '-'){
+							let changePercent = (stock.z == stock.y ) ? 0.0 : (stock.z - stock.y) / stock.y * 100;
+							let updateValue = {name : stock.n, currentPrice : stock.z, change : String(changePercent.toFixed(2))};
+							stockData[stock.c] = updateValue;
+						}
+					});
+					chrome.storage.local.set(stockData);
+				}
             }
         });
 	});
